@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<title></title>
+	<style>
+body{font-size: 3rem;}
+h1 {font-size: 4.0rem; margin: 0;}
+h2 {font-size: 3.5rem; margin: 0;}
+h3 {font-size: 3.0rem; margin: 0;}
+h4 {font-size: 2.5rem; margin: 0;}
+p {font-size: 2rem;}
+ul {list-style-type: none; margin: 0;padding: 0;}
+li {padding: 0.5rem;}
+	</style>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+const onload = () => document.readyState !== 'complete'
+	? new Promise(r => document.addEventListener('readystatechange', () => {
+		switch (document.readyState) {
+			case 'complete': r();break;
+			default:
+		}
+	}))
+	: Promise.resolve();
+
+onload().then(_ => {
+	var live = document.getElementById('live');
+	var socket = io();
+	socket.on('fswatch', msg => live.innerHTML = msg);
+	socket.emit('readlive', 'live.md');
+});
+	</script>
+</head>
+<body>
+	<div id="live"></div>
+</body>
+</html>

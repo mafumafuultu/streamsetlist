@@ -1,0 +1,50 @@
+:root {
+	--title-z: 'title (for free talk)';
+	--title-u: 'title (for sing)';
+	--font: 6rem;
+	--txt-col: white;
+	--stroke: 1rem var(--txt-col);
+	--stroke0: 0px var(--txt-col);
+
+}
+@keyframes rotatethunder {
+	from {transform: rotateY(0deg);}
+	to {transform: rotateY(360deg);}
+}
+
+#title {
+	font-size: var(--font);
+	position:relative;
+	text-stroke: 8px white;
+	-webkit-text-stroke: 8px white;
+	height: calc(var(--font) + 1rem);
+	width: 100%;
+}
+#title:before,
+#title:after {position: absolute;left:0;top:0;content: attr(class);}
+#title:before {text-stroke: var(--stroke);-webkit-text-stroke: var(--stroke);}
+#title:after {text-stroke: var(--stroke0);-webkit-text-stroke: var(--stroke0);color: transparent;background-clip: text;-webkit-background-clip: text;}
+
+.z:after {background: linear-gradient(#ea1f5f 25%, #cb5bbd 75%);}
+.z:before,.z:after{content: var(--title-z) !important}
+.u:after {background: linear-gradient(#cb5bbd 0%, orange 100%);}
+.u:before,.u:after{content: var(--title-u) !important}
+
+ul {list-style-type: none; margin: 0;padding: 0;}
+li {padding: 0.5rem;font-size: 2.5rem;}
+
+ul>li:last-child {
+	position: relative;
+	margin-left: 3rem;
+}
+ul>li:last-child:before {
+	content: "⚡";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -3rem;
+	animation-name: rotatethunder;
+	animation-duration: 3000ms;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
