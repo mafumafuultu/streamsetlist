@@ -23,9 +23,8 @@ live.md
 ```md
 <link rel="stylesheet" href="style.css">
 <!--
-class="u"
-
-<div id="title" class="z" for free talk class</div>
+class="u" for song
+class="z" for free talk
 -->
 <div id="title" class="u"></div>
 
