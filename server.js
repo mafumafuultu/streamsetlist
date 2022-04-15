@@ -5,24 +5,19 @@ const markdown = require("markdown-wasm");
 const {Server} = require('socket.io');
 const hostname = '127.0.0.1';
 const port = 3000;
-const idx = './index.html';
 const targetfile = './live.md';
 const names = {
 	targetfile: './live.md',
 };
 const server = http.createServer((req, res) => {
 	var filePath = '.' + req.url;
-	if (filePath == './') {
-		filePath = './index.html';
-	}
+	if (filePath == './') filePath = './index.html';
 	var contentType = mime.lookup(filePath) || 'application/octet-stream';
 	fs.readFile(filePath, function(err, content) {
 		if (err) {
 			if (err.code == 'ENOENT') {
 				fs.readFile('./404.html', function(err, content) {
-					res.writeHead(404, {
-						'Content-Type': 'text/html'
-					});
+					res.writeHead(404, { 'Content-Type': 'text/html' });
 					res.end(content, 'utf-8');
 				});
 			} else {
@@ -51,4 +46,4 @@ io.on('connection', socket => {
 	socket.on('chat message', msg => console.debug(msg))
 	socket.on('readlive', readFile);
 });
-fs.watch(targetfile, (e, fname) => fname ? readFile() : void 0);
+fs.watch(targetfile, (_, fname) => fname ? readFile() : void 0);
